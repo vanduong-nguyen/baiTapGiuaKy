@@ -3,7 +3,7 @@ body {
   display: flex;
   flex-direction: column;
   /* align-items: center; */
-  background-color: #f5f5f5;
+  background-color: rgba(173, 216, 230, 0.1);
 }
 
 .kh-border {
@@ -46,47 +46,89 @@ th{
 }
 
 /* -----------------------------------------phần add-sv---------------------------------------- */
+/* Định dạng cho form thêm sinh viên (#add-sv-form) */
 #add-sv-form {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999; /* Đảm bảo form nằm trên */
+  position: fixed; /* Giữ cố định form trên màn hình */
+  top: 50%; /* Vị trí ở giữa màn hình */
+  left: 50%;
+  transform: translate(-50%, -50%); /* Đưa tâm form ra giữa màn hình */
+  background-color: rgb(251, 251, 251); /* Màu nền trắng */
+  border-radius: 8px; /* Góc bo tròn */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Hiệu ứng bóng mờ */
+  z-index: 999; /* Đảm bảo form nằm trên cùng */
+  display: none; /* Ban đầu ẩn */
+  padding: 20px; /* Khoảng cách bên trong */
+  max-width: 600px; /* Chiều rộng tối đa */
+  width: 100%; /* Đáp ứng trên các màn hình nhỏ hơn */
 }
-.add-sv-container {
-  background: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-  text-align: center;
-}
+
+/* Nội dung bên trong #add-sv-form */
 .add-sv-container h2 {
-  margin-bottom: 15px;
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 24px;
+  color: #333; /* Màu đen nhạt */
 }
-.add-sv-container input {
+
+.add-sv-container {
+  display: flex;
+  flex-direction: column; /* Hiển thị các phần tử dọc theo dòng */
+  gap: 15px; /* Giãn cách giữa các phần tử */
+}
+
+/* Các trường nhập liệu */
+.add-sv-container input[type="text"],
+.add-sv-container input[type="date"],
+.add-sv-container select {
   width: 100%;
-  padding: 10px;
-  margin: 10px 0;
+  padding: 8px;
+  font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
-.add-sv-container button {
-  padding: 10px 20px;
-  background: black  ;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin: 5px;
+
+.add-sv-container input:focus,
+.add-sv-container select:focus {
+  border-color: #007bff; /* Màu xanh dương khi focus */
+  outline: none;
 }
-.add-sv-container button:hover {
-  background: silver;
-  color : black;
+
+/* Nút "Thêm sinh viên" */
+.add-sv-container button[type="submit"] {
+  background-color: #28a745; /* Màu xanh lá */
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease; /* Hiệu ứng hover */
+}
+
+.add-sv-container button[type="submit"]:hover {
+  background-color: #218838; /* Màu tối hơn khi hover */
+}
+
+/* Nút "Đóng" */
+#close-add-sv-form {
+  background-color: #dc3545; /* Màu đỏ */
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
+  transition: background-color 0.3s ease; /* Hiệu ứng hover */
+}
+
+#close-add-sv-form:hover {
+  background-color: #c82333; /* Màu đỏ đậm hơn khi hover */
 }
 /* ---------------------------------------------------------------- */
 
@@ -97,24 +139,95 @@ th{
 
 /* Form chỉnh sửa và thêm sinh viên ẩn mặc định */
 #edit-form {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: none;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed; /* Giữ cố định form trên màn hình */
+  top: 50%; /* Vị trí ở giữa màn hình */
+  left: 50%;
+  transform: translate(-50%, -50%); /* Đưa tâm form ra giữa màn hình */
+  background-color: rgb(251, 251, 251); /* Màu nền trắng */
+  border-radius: 8px; /* Góc bo tròn */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Hiệu ứng bóng mờ */
+  z-index: 999; /* Đảm bảo form nằm trên cùng */
+  display: none; /* Ban đầu ẩn */
+  padding: 20px; /* Khoảng cách bên trong */
+  max-width: 600px; /* Chiều rộng tối đa */
+  width: 100%; /* Đáp ứng trên các màn hình nhỏ hơn */
 }
 
 /* Form container */
+/*.edit-form-container {*/
+/*    background: #b31d1d;*/
+/*    padding: 20px;*/
+/*    border-radius: 10px;*/
+/*    width: 400px;*/
+/*    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);*/
+/*}*/
+/* Nội dung bên trong #add-sv-form */
+.edit-form-container h2 {
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 24px;
+  color: #333; /* Màu đen nhạt */
+}
+
 .edit-form-container {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    width: 400px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column; /* Hiển thị các phần tử dọc theo dòng */
+  gap: 15px; /* Giãn cách giữa các phần tử */
+}
+
+/* Các trường nhập liệu */
+.edit-form-container input[type="text"],
+.edit-form-container input[type="date"],
+.edit-form-container select {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.edit-form-container input:focus,
+.edit-form-container select:focus {
+  border-color: #007bff; /* Màu xanh dương khi focus */
+  outline: none;
+}
+
+/* Nút "Thêm sinh viên" */
+.edit-form-container button[type="submit"] {
+  background-color: #28a745; /* Màu xanh lá */
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease; /* Hiệu ứng hover */
+}
+
+.edit-form-container button[type="submit"]:hover {
+  background-color: #218838; /* Màu tối hơn khi hover */
+}
+
+/* Nút "Đóng" */
+#close-edit-sv-form {
+  background-color: #dc3545; /* Màu đỏ */
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
+  transition: background-color 0.3s ease; /* Hiệu ứng hover */
+}
+
+#close-edit-sv-form:hover {
+  background-color: #c82333; /* Màu đỏ đậm hơn khi hover */
 }
 
 /* ---------------------------------------------------------------- */

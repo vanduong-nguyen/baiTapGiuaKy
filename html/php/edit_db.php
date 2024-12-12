@@ -22,7 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 group_ = '$group', 
                 level_ = '$level' 
             WHERE id = $id";
-
+    $sql_reset_ids = "SET @newid = 0; 
+                      UPDATE table_students SET id = (@newid := @newid + 1) ORDER BY id ASC;";
     // Thực thi truy vấn
     if (mysqli_query($conn, $sql)) {
         // Cập nhật thành công, chuyển hướng về trang danh sách

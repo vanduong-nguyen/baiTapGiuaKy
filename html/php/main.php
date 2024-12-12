@@ -30,7 +30,8 @@ if (!empty($fullname) && !empty($dob) && $gender !== null && !empty($hometown) &
     header("Location: ../giua_ky_utt.php?status=error");
     exit;
 }
-
+$sql_reset_ids = "SET @newid = 0; 
+                      UPDATE table_students SET id = (@newid := @newid + 1) ORDER BY id ASC;";
 // Đóng kết nối
 mysqli_close($conn);
 ?>

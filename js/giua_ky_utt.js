@@ -2,7 +2,7 @@
 function editStudent(id) {
     // Lấy hàng tương ứng với ID
     const row = document.querySelector(`tr[data-id='${id}']`);
-    
+
     // Lấy giá trị từ các cột
     const fullname = row.querySelector('.col-fullname').innerText;
     const dob = row.querySelector('.col-dob').innerText;
@@ -25,6 +25,8 @@ function editStudent(id) {
         case 'Khác':
             level = 3;
             break;
+
+            resetIds();
     }
 
     // Điền dữ liệu vào form
@@ -45,6 +47,7 @@ function closeEditForm() {
     const form = document.getElementById('edit-form');
     form.style.opacity = '0';
     form.style.display = 'none';
+    resetIds();
 }
 
 // Hiển thị form thêm sinh viên
@@ -60,10 +63,12 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-
+// Xoá sinh viên
 function showConfirm(id) {
     document.getElementById('delete-id').value = id; // Gán ID vào form ẩn
+
     document.getElementById('confirm-delete').style.display = 'flex'; // Hiển thị popup
+
 }
 
 function closeConfirm() {
@@ -80,20 +85,18 @@ document.getElementById('search-button').addEventListener('click', function () {
         alert('Vui lòng nhập từ khóa tìm kiếm!');
     }
 });
-var modal = document.getElementById('id01');
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-// Cập nhật STT
-function updateStudentIds() {
-    // Sắp xếp mảng dữ liệu theo id
-    students.sort((a, b) => a.id - b.id);
 
-    // Cập nhật lại id (số thứ tự) cho các sinh viên
-    for (let i = 0; i < students.length; i++) {
-        students[i].id = i + 1;
-    }
+function resetIds() {
+    // Lấy tất cả các phần tử có thuộc tính data-id
+    const elements = document.querySelectorAll('[data-id]');
+
+    // Chuyển đổi NodeList thành mảng và sắp xếp theo data-id
+    const elementsArray = Array.from(elements);
+    elementsArray.sort((a, b) => a.dataset.id - b.dataset.id);
+
+    // Gán lại ID bắt đầu từ 1
+    let newId = 1;
+    elementsArray.forEach(element => {
+        element.dataset.id = newId++;
+    });
 }

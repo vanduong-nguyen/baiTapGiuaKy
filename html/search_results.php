@@ -21,13 +21,18 @@ if ($searchValue !== '') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kết quả tìm kiếm</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: rgba(173, 216, 230, 0.1);
+        }
+    </style>
 </head>
 <body>
     <h1 class="text-center">Kết quả tìm kiếm</h1>
     <div class="container mt-5">
         <?php if ($result && mysqli_num_rows($result) > 0): ?>
             <table class="table table-hover table-bordered">
-                <thead>
+                <thead style="background-color: cadetblue; color: white;" >
                     <tr>
                         <th>ID</th>
                         <th>Họ và tên</th>
